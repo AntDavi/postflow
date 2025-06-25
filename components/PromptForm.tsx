@@ -80,10 +80,11 @@ export default function PromptForm() {
             }
 
             const data = await res.json();
-            const payload = encodeURIComponent(data.result);
+            const payload = encodeURIComponent(JSON.stringify(data.result)); // ✅ stringify antes de passar pra URL
             router.push(`/result?data=${payload}&days=${form.days}`);
         } catch {
             setError("Erro de conexão. Tente novamente.");
+        } finally {
             setLoading(false);
         }
     };
@@ -97,7 +98,6 @@ export default function PromptForm() {
                     {typeof error === 'string' ? error : error.message}
                 </p>
             )}
-
 
             <div className="space-y-2">
                 <label className="font-medium">Público-alvo</label>

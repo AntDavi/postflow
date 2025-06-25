@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import openai from '@/lib/openai';
 import { z } from 'zod';
 
-// Schema que reflete o novo formato do formulário
 const BodySchema = z.object({
     audience: z.string().min(1),
     description: z.string().min(1),
@@ -12,30 +11,53 @@ const BodySchema = z.object({
 
 export async function POST(req: NextRequest) {
     const body = await req.json();
+    console.log("[API] Body recebido:", body);
     const parsed = BodySchema.safeParse(body);
 
     if (!parsed.success) {
-        // Extrai apenas as mensagens de erro relevantes
-        const messages = parsed.error.errors.map(e => e.message).join(' ');
+        const messages = parsed.error.errors.map(e => e.message);
+        console.log("[API] Erro de validação:", messages);
         return NextResponse.json({ error: messages }, { status: 400 });
     }
 
     const { audience, description, type, days } = parsed.data;
 
     try {
+        const prompt = `
+Gere um cronograma de ${days} dias para redes sociais voltado para o público "${audience}" no nicho "${description}".
+Os formatos dos posts devem incluir: ${type.join(', ')}.
+
+Retorne a resposta exclusivamente no seguinte formato JSON:
+
+[
+  {
+    "dia": 1,
+    "tipo": "Tipo de post (ex: imagem, vídeo, carrossel)",
+    "titulo": "Título do post",
+    "descricao": "Descrição do que deve ser no post (ex: um carrossel com 5 imagens sobre o tema X)",
+    "conteudo": "Texto principal do post",
+    "hashtags": ["#hashtag1", "#hashtag2"],
+    "cta": "Chamada para ação"
+  },
+  ...
+]
+
+Importante:
+- Não adicione texto fora do JSON.
+- Cada dia deve ser um item do array.
+- Use linguagem envolvente, natural e adequada ao público-alvo.
+`;
+
         const resp = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo',
             messages: [
                 {
                     role: 'system',
-                    content:
-                        'Você é um assistente que gera cronogramas de postagem para redes sociais.',
+                    content: 'Você é um assistente que gera cronogramas de postagem para redes sociais.',
                 },
                 {
                     role: 'user',
-                    content: `Gere um cronograma de ${days} dias para o público "${audience}", nicho "${description}", nos formatos: ${type.join(
-                        ', '
-                    )}. Para cada dia, forneça título, conteúdo, hashtags que sejam relevantes, CTA.`,
+                    content: prompt,
                 },
             ],
             temperature: 0.7,
@@ -43,13 +65,32 @@ export async function POST(req: NextRequest) {
         });
 
         const content = resp.choices?.[0]?.message?.content;
-        return NextResponse.json({ result: content });
+        console.log("[API] Resposta bruta da OpenAI:", content);
+
+        try {
+            const cleaned = (content ?? '')
+                .replace(/^```json/, '')
+                .replace(/^```/, '')
+                .replace(/```$/, '')
+                .trim();
+
+            console.log("[API] Conteúdo limpo para parse:", cleaned);
+
+            const json = JSON.parse(cleaned);
+            console.log("[API] JSON parseado com sucesso:", json);
+
+            return NextResponse.json({ result: json });
+        } catch (e) {
+            console.error("[API] Falha ao parsear JSON:", content);
+            return NextResponse.json({
+                error: 'A resposta do modelo não pôde ser interpretada como JSON.',
+            }, { status: 500 });
+        }
     } catch (err: any) {
         console.error('OpenAI error:', err);
         let msg = 'Erro interno ao gerar cronograma.';
         if (err.code === 'insufficient_quota') {
-            msg =
-                'Limite de uso excedido. Verifique sua conta ou tente novamente mais tarde.';
+            msg = 'Limite de uso excedido. Verifique sua conta ou tente novamente mais tarde.';
         }
         return NextResponse.json({ error: msg }, { status: 500 });
     }
