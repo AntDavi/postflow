@@ -9,7 +9,6 @@ type ContentItem = {
     titulo: string;
     conteudo: string;
     hashtags: string[];
-    cta: string;
     tipo: string;
     descricao: string;
 };

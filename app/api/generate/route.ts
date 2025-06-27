@@ -37,7 +37,6 @@ Retorne a resposta exclusivamente no seguinte formato JSON:
     "descricao": "Descrição do que deve ser no post (ex: um carrossel com 5 imagens sobre o tema X)",
     "conteudo": "Texto principal do post",
     "hashtags": ["#hashtag1", "#hashtag2"],
-    "cta": "Chamada para ação"
   },
   ...
 ]

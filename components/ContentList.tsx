@@ -9,7 +9,6 @@ type ContentItem = {
     descricao: string
     conteudo: string
     hashtags: string[]
-    cta: string
 }
 
 export default function ContentList({ items }: { items: ContentItem[] }) {
