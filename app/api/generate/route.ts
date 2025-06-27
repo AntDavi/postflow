@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from 'next/server';
 import openai from '@/lib/openai';
 import { z } from 'zod';
@@ -12,8 +13,8 @@ const BodySchema = z.object({
 export async function POST(req: NextRequest) {
     const body = await req.json();
     console.log("[API] Body recebido:", body);
-    const parsed = BodySchema.safeParse(body);
 
+    const parsed = BodySchema.safeParse(body);
     if (!parsed.success) {
         const messages = parsed.error.errors.map(e => e.message);
         console.log("[API] Erro de validação:", messages);
@@ -22,8 +23,7 @@ export async function POST(req: NextRequest) {
 
     const { audience, description, type, days } = parsed.data;
 
-    try {
-        const prompt = `
+    const prompt = `
 Gere um cronograma de ${days} dias para redes sociais voltado para o público "${audience}" no nicho "${description}".
 Os formatos dos posts devem incluir: ${type.join(', ')}.
 
@@ -48,6 +48,7 @@ Importante:
 - Use linguagem envolvente, natural e adequada ao público-alvo.
 `;
 
+    try {
         const resp = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo',
             messages: [
@@ -64,26 +65,27 @@ Importante:
             max_tokens: 3000,
         });
 
-        const content = resp.choices?.[0]?.message?.content;
+        const content = resp.choices?.[0]?.message?.content ?? '';
         console.log("[API] Resposta bruta da OpenAI:", content);
 
+        // 🧼 Limpeza da resposta para evitar erro de parse
+        const cleaned = content
+            .trim()
+            .replace(/^```json/, '')
+            .replace(/^```/, '')
+            .replace(/```$/, '')
+            .trim();
+
+        console.log("[API] Conteúdo limpo para parse:", cleaned);
+
         try {
-            const cleaned = (content ?? '')
-                .replace(/^```json/, '')
-                .replace(/^```/, '')
-                .replace(/```$/, '')
-                .trim();
-
-            console.log("[API] Conteúdo limpo para parse:", cleaned);
-
             const json = JSON.parse(cleaned);
-            console.log("[API] JSON parseado com sucesso:", json);
-
+            console.log("[API] JSON parseado com sucesso");
             return NextResponse.json({ result: json });
         } catch (e) {
-            console.error("[API] Falha ao parsear JSON:", content);
+            console.error("[API] Falha ao parsear JSON:", e);
             return NextResponse.json({
-                error: 'A resposta do modelo não pôde ser interpretada como JSON.',
+                error: 'A resposta do modelo não pôde ser interpretada como JSON válido.',
             }, { status: 500 });
         }
     } catch (err: any) {
@@ -91,6 +93,9 @@ Importante:
         let msg = 'Erro interno ao gerar cronograma.';
         if (err.code === 'insufficient_quota') {
             msg = 'Limite de uso excedido. Verifique sua conta ou tente novamente mais tarde.';
+        }
+        if (err.code === 'invalid_api_key') {
+            msg = 'Chave de API inválida. Verifique seu .env.local.';
         }
         return NextResponse.json({ error: msg }, { status: 500 });
     }
