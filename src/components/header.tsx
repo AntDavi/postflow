@@ -6,7 +6,7 @@ import AvatarMenu from "./avatar-menu";
 export default function Header() {
   return (
     <header className="border-b">
-      <div className="container mx-auto">
+      <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4 ">
           <div className="flex items-center gap-2">
             <Image src="/logo.svg" alt="Postflow Logo" width={40} height={40} />
