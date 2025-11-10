@@ -1,28 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Mail, Menu, SendHorizonal, X } from "lucide-react";
+import { Mail, SendHorizonal } from "lucide-react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 
-const menuItems = [
-  { name: "Features", href: "#" },
-  { name: "Solution", href: "#" },
-  { name: "Pricing", href: "#" },
-  { name: "About", href: "#" },
-];
-
 export default function Home() {
-  const [menuState, setMenuState] = useState(false);
   return (
     <>
       <header>
-        <nav
-          data-state={menuState && "active"}
-          className="fixed z-20 w-full border-b border-dashed bg-white backdrop-blur md:relative dark:bg-zinc-950/50 lg:dark:bg-transparent"
-        >
+        <nav className="fixed z-20 w-full border-b border-dashed bg-white backdrop-blur md:relative dark:bg-zinc-950/50 lg:dark:bg-transparent">
           <div className="m-auto max-w-5xl px-6">
             <div className="flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
               <div className="flex w-full justify-between lg:w-auto">
@@ -77,7 +65,7 @@ export default function Home() {
 
                     <Input
                       placeholder="Seu email aqui"
-                      className="h-14 w-full bg-transparent pl-12 focus:outline-none border-0 rounded-(--radius)    "
+                      className="h-14 w-full bg-transparent! pl-12 focus:outline-none border-0 rounded-(--radius)"
                       type="email"
                     />
 
