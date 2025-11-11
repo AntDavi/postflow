@@ -6,25 +6,36 @@ import CardDetailsDashboard from "../_components/CardDetailsDashboard";
 
 export default function DashboardPage() {
   return (
-    <main className="container mx-auto px-4 py-4">
-      <section className="flex items-center justify-between py-4">
-        <div className="flex flex-col items-start">
-          <h2 className="text-2xl font-semibold">Bem-vindo ao Dashboard</h2>
-          <p className="text-zinc-500 mt-2">
+    <main className="container mx-auto px-4 py-8 max-w-7xl">
+      {/* Header Section */}
+      <section className="flex items-center justify-between py-6 mb-6">
+        <div className="flex flex-col items-start gap-2">
+          <h2 className="text-3xl font-bold bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+            Bem-vindo ao Dashboard
+          </h2>
+          <p className="text-muted-foreground text-base">
             Gerencie seus cronogramas de conteúdo em um só lugar.
           </p>
         </div>
 
-        <Button asChild>
+        <Button
+          asChild
+          size="lg"
+          className="shadow-md hover:shadow-lg transition-shadow"
+        >
           <Link href="/create" className="flex items-center gap-2">
-            <Plus className="mr-2 h-4 w-4" />
+            <Plus className="h-5 w-5" />
             Novo Cronograma
           </Link>
         </Button>
       </section>
 
-      <section className="mt-4">
-        <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {/* Statistics Cards Section */}
+      <section className="mb-10">
+        <h3 className="text-lg font-semibold mb-4 text-muted-foreground">
+          Estatísticas
+        </h3>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* Aqui você pode mapear e renderizar os cartões de estatísticas */}
           <CardDetailsDashboard
             icon={<File />}
@@ -50,17 +61,28 @@ export default function DashboardPage() {
         </div>
       </section>
 
-      <section className="mt-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold">Cronogramas Recentes</h2>
-          <Button variant="ghost" asChild>
-            <Link href="#" className="text-primary">
+      {/* Recent Cronograms Section */}
+      <section>
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h3 className="text-2xl font-semibold">Cronogramas Recentes</h3>
+            <p className="text-sm text-muted-foreground mt-1">
+              Seus últimos cronogramas criados
+            </p>
+          </div>
+          <Button
+            variant="ghost"
+            asChild
+            className="text-primary hover:text-primary/80"
+          >
+            <Link href="#" className="flex items-center gap-2">
               Ver Todos
+              <Calendar className="h-4 w-4" />
             </Link>
           </Button>
         </div>
 
-        <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {/* Aqui você pode mapear e renderizar os cartões de cronograma */}
           <CronogramCard
             title="Cronograma de Março"

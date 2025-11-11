@@ -1,9 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 
 export interface CardDetailsDashboardProps {
   icon: React.ReactNode;
@@ -21,18 +16,24 @@ export default function CardDetailsDashboard({
   icon_color,
 }: CardDetailsDashboardProps) {
   return (
-    <Card>
-      <CardContent>
-        <div className="flex flex-col gap-3 w-fit">
-          <div
-            className="p-2 rounded-md"
-            style={{ backgroundColor: bg_color, color: icon_color }}
-          >
-            {icon}
+    <Card className="hover:shadow-lg transition-all duration-300 border-border/50">
+      <CardContent className="p-6">
+        <div className="flex items-start justify-between">
+          <div className="flex flex-col gap-4">
+            <div
+              className="p-3 rounded-xl w-fit shadow-sm"
+              style={{ backgroundColor: bg_color, color: icon_color }}
+            >
+              {icon}
+            </div>
+            <div className="space-y-1">
+              <p className="text-3xl font-bold tracking-tight">{mount}</p>
+              <span className="text-sm text-muted-foreground font-medium">
+                {description}
+              </span>
+            </div>
           </div>
-          <p className="text-2xl font-semibold">{mount}</p>
         </div>
-        <span className="text-gray-400">{description}</span>
       </CardContent>
     </Card>
   );
