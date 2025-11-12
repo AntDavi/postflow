@@ -27,8 +27,7 @@ import { Sparkles, CalendarIcon, Lightbulb } from "lucide-react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import GoBackButton from "@/components/goback";
 
 // Schema de validação com Zod
 const formSchema = z.object({
@@ -66,12 +65,6 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export default function CreatePage() {
-  const router = useRouter();
-
-  const handleGoBack = () => {
-    router.back();
-  };
-
   const [selectedContent, setSelectedContent] = React.useState<string[]>([]);
 
   const form = useForm<FormValues>({
@@ -113,9 +106,7 @@ export default function CreatePage() {
 
   return (
     <main className="container mx-auto px-4 py-8 max-w-7xl">
-      <Button variant="link" onClick={handleGoBack} className="">
-        Voltar
-      </Button>
+      <GoBackButton />
       {/* Header Section */}
       <section className="flex items-center flex-col py-8 mb-8">
         <div className="p-5 bg-linear-to-br from-primary/10 to-primary/5 rounded-2xl mb-4 shadow-sm">
