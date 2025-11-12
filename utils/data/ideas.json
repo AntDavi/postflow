@@ -1,0 +1,107 @@
+{
+  "items": [
+    {
+      "titulo": "Tutorial: Como aumentar engajamento",
+      "tipo": "Reels",
+      "descricao": "Crie um vídeo dinâmico mostrando 5 dicas práticas para aumentar o engajamento nas redes sociais. Comece com um hook visual e use cortes rápidos entre as cenas. Mostre exemplos de postagens reais e finalize com uma frase de incentivo. Termine o vídeo com um CTA convidando o público a comentar suas próprias estratégias.",
+      "data_publicacao": "2025-06-12",
+      "hashtags": [
+        "#engajamento",
+        "#marketingdigital",
+        "#redessociais",
+        "#dicasdemarketing"
+      ]
+    },
+    {
+      "titulo": "Carrossel: Erros que reduzem seu alcance",
+      "tipo": "Carrossel",
+      "descricao": "Monte um carrossel com 6 slides mostrando os principais erros que fazem o alcance cair nas redes sociais. No primeiro slide, um título provocativo ('Você ainda comete esses erros?'). Nos slides seguintes, liste erros comuns como 'Postar sem constância', 'Não usar legendas atrativas' e 'Ignorar interações'. No último slide, incentive o público a compartilhar o post com um amigo criador.",
+      "data_publicacao": "2025-06-14",
+      "hashtags": [
+        "#alcance",
+        "#instagramtips",
+        "#conteudodigital",
+        "#marketing"
+      ]
+    },
+    {
+      "titulo": "Postagem: Tendências de conteúdo em 2025",
+      "tipo": "Postagem",
+      "descricao": "Escreva uma publicação destacando as tendências que dominarão as redes sociais em 2025: vídeos curtos com storytelling, comunidades nichadas e conteúdos educativos rápidos. Fale brevemente sobre como adaptar a linguagem e o formato ao público-alvo. Finalize perguntando: 'Qual dessas tendências você já está aplicando?'.",
+      "data_publicacao": "2025-06-17",
+      "hashtags": [
+        "#tendencias2025",
+        "#marketingdeconteudo",
+        "#socialmedia",
+        "#storytelling"
+      ]
+    },
+    {
+      "titulo": "Newsletter: Insights da Semana",
+      "tipo": "Newsletter",
+      "descricao": "Envie um e-mail semanal com os melhores insights de marketing digital. Estruture o texto com uma breve introdução, três destaques da semana e uma reflexão final. Inclua links para leituras complementares e convide o leitor a responder a newsletter com sua opinião. O tom deve ser leve e informativo, como uma conversa entre colegas.",
+      "data_publicacao": "2025-06-20",
+      "hashtags": ["#newsletter", "#conteudosemanal", "#marketingdigital"]
+    },
+    {
+      "titulo": "Reels: Bastidores da Criação de Conteúdo",
+      "tipo": "Reels",
+      "descricao": "Grave um vídeo mostrando os bastidores da criação de um post: do brainstorm à publicação. Mostre um pouco do processo criativo, erros engraçados e a edição final. Use trilha sonora descontraída e legendas curtas. Termine com uma frase do tipo 'Por trás de cada post, existe uma boa dose de café e criatividade!'.",
+      "data_publicacao": "2025-06-22",
+      "hashtags": [
+        "#criacaodeconteudo",
+        "#bastidores",
+        "#socialmedia",
+        "#reels"
+      ]
+    },
+    {
+      "titulo": "Carrossel: Como transformar seguidores em clientes",
+      "tipo": "Carrossel",
+      "descricao": "Produza um carrossel educativo com 5 passos práticos para transformar seguidores em clientes. Comece com uma pergunta instigante ('Você sabe vender sem parecer vendedor?'). Apresente estratégias como gerar valor antes da oferta, criar escassez e mostrar depoimentos reais. Finalize com um CTA para salvar o post.",
+      "data_publicacao": "2025-06-25",
+      "hashtags": [
+        "#vendas",
+        "#estrategiadigital",
+        "#clientes",
+        "#carrosselinstagram"
+      ]
+    },
+    {
+      "titulo": "Artigo: A psicologia por trás do engajamento online",
+      "tipo": "Artigo de Blog",
+      "descricao": "Escreva um artigo explorando os gatilhos mentais que impulsionam o engajamento nas redes sociais. Fale sobre reciprocidade, pertencimento e curiosidade, exemplificando com campanhas conhecidas. Inclua um subtítulo para cada tópico e feche o texto mostrando como aplicar esses conceitos em sua própria estratégia.",
+      "data_publicacao": "2025-06-27",
+      "hashtags": [
+        "#psicologiadomarketing",
+        "#blogmarketing",
+        "#gatilhosmentais"
+      ]
+    },
+    {
+      "titulo": "Stories: Enquete interativa sobre conteúdo favorito",
+      "tipo": "Stories",
+      "descricao": "Crie uma sequência de stories interativos perguntando ao público qual tipo de conteúdo ele mais gosta: dicas rápidas, bastidores ou curiosidades. Use enquetes e caixas de pergunta. No final, mostre os resultados e agradeça a participação. Isso aumenta o engajamento e gera insights sobre preferências do público.",
+      "data_publicacao": "2025-06-29",
+      "hashtags": ["#storiesinterativos", "#enquete", "#publicoalvo"]
+    },
+    {
+      "titulo": "Postagem: A importância da consistência nas redes",
+      "tipo": "Postagem",
+      "descricao": "Escreva um texto inspirador sobre o valor da consistência na criação de conteúdo. Use uma metáfora, como 'as redes são como uma academia: os resultados vêm com disciplina'. Dê dicas práticas para manter uma rotina: planejar com antecedência, definir temas fixos e usar ferramentas de agendamento.",
+      "data_publicacao": "2025-07-02",
+      "hashtags": ["#consistencia", "#planejamentodeconteudo", "#motivacao"]
+    },
+    {
+      "titulo": "Reels: 3 ferramentas que facilitam sua vida",
+      "tipo": "Reels",
+      "descricao": "Monte um vídeo curto listando 3 ferramentas gratuitas que ajudam na criação de conteúdo (por exemplo, Canva, Notion e CapCut). Mostre cada ferramenta rapidamente, com legendas e uma música animada. Finalize com um CTA para salvar o vídeo e compartilhar com outros criadores.",
+      "data_publicacao": "2025-07-05",
+      "hashtags": [
+        "#ferramentasdigitais",
+        "#criadoresdeconteudo",
+        "#reelsdicas"
+      ]
+    }
+  ]
+}
