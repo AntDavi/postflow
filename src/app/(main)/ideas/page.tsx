@@ -16,7 +16,7 @@ export default async function IdeasPage() {
       {/* Header Section */}
       <section className="flex flex-col lg:flex-row items-start lg:items-center justify-between py-6 mb-8 gap-6">
         <div className="flex flex-col items-start gap-2">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+          <h2 className="text-4xl font-bold bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent">
             Suas Ideias de Conteúdo
           </h2>
           <p className="text-muted-foreground text-base">

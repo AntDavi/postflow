@@ -19,7 +19,7 @@ export default function AvatarMenu() {
       <DropdownMenuContent align="end">
         <DropdownMenuItem>Perfil</DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/">Sair</Link>
+          <Link href="/logout">Sair</Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

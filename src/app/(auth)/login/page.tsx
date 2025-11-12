@@ -5,6 +5,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -25,8 +26,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { FaGoogle } from "react-icons/fa";
+
 import { login, signup } from "./actions";
 import Image from "next/image";
+import { createClient as createSupabaseBrowserClient } from "../../../../utils/supabase/client";
 
 // Schemas de validação
 const signInSchema = z.object({
@@ -60,9 +64,12 @@ type SignUpFormData = z.infer<typeof signUpSchema>;
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+  const [oauthError, setOauthError] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
   const message = searchParams.get("message");
+  const combinedError = oauthError ?? error;
 
   // Form para Sign In
   const signInForm = useForm<SignInFormData>({
@@ -114,6 +121,42 @@ export default function LoginPage() {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    setOauthError(null);
+    setGoogleLoading(true);
+
+    try {
+      const supabase = createSupabaseBrowserClient();
+      const siteUrl =
+        process.env.NEXT_PUBLIC_SITE_URL ||
+        (typeof window !== "undefined" ? window.location.origin : "");
+
+      if (!siteUrl) {
+        throw new Error(
+          "URL da aplicação não encontrada. Defina NEXT_PUBLIC_SITE_URL."
+        );
+      }
+
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: `${siteUrl}/auth/callback`,
+        },
+      });
+
+      if (error) {
+        throw error;
+      }
+    } catch (err) {
+      const message =
+        err instanceof Error
+          ? err.message
+          : "Não foi possível iniciar o login com o Google.";
+      setOauthError(message);
+      setGoogleLoading(false);
+    }
+  };
+
   return (
     <section className="min-h-screen flex items-center justify-center bg-background p-4">
       <div className="w-full max-w-md">
@@ -131,9 +174,9 @@ export default function LoginPage() {
             <CardDescription>
               Entre com seus dados ou crie uma nova conta
             </CardDescription>
-            {error && (
+            {combinedError && (
               <div className="p-3 text-sm text-red-800 bg-red-100 border border-red-200 rounded">
-                {error}
+                {combinedError}
               </div>
             )}
             {message && (
@@ -272,6 +315,21 @@ export default function LoginPage() {
               </TabsContent>
             </Tabs>
           </CardContent>
+          <p className="text-center text-gray-500">ou</p>
+          <CardFooter>
+            <Button
+              type="button"
+              className="w-full"
+              onClick={handleGoogleSignIn}
+              disabled={googleLoading}
+            >
+              {googleLoading && (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              )}
+              <FaGoogle className="mr-2" />
+              Entrar com Google
+            </Button>
+          </CardFooter>
         </Card>
       </div>
     </section>
