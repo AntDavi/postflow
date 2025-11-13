@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Calendar, File, Plus, Sparkles } from "lucide-react";
+import { Calendar, Calendar1, File, Plus, Sparkles } from "lucide-react";
 import Link from "next/link";
 import CronogramCard from "../_components/CronogramCard";
 import CardDetailsDashboard from "../_components/CardDetailsDashboard";
@@ -18,16 +18,29 @@ export default function DashboardPage() {
           </p>
         </div>
 
-        <Button
-          asChild
-          size="lg"
-          className="shadow-md hover:shadow-lg transition-shadow"
-        >
-          <Link href="/create" className="flex items-center gap-2">
-            <Plus className="h-5 w-5" />
-            Novo Cronograma
-          </Link>
-        </Button>
+        <div className="gap-3 flex">
+          <Button
+            asChild
+            size="lg"
+            className="shadow-md hover:shadow-lg transition-shadow"
+          >
+            <Link href="/create" className="flex items-center gap-2">
+              <Plus className="h-5 w-5" />
+              Novo Cronograma
+            </Link>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="secondary"
+            className="shadow-md hover:shadow-lg transition-shadow"
+          >
+            <Link href="/calendar" className="flex items-center gap-2">
+              <Calendar1 className="h-5 w-5" />
+              Visualize Calendário
+            </Link>
+          </Button>
+        </div>
       </section>
 
       {/* Statistics Cards Section */}
